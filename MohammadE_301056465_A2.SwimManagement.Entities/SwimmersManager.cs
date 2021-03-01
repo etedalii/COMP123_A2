@@ -31,8 +31,8 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				}
 			}
 
-			return $"{registrant.Id}{delimiter}{registrant.Name}{delimiter}{registrant.DateOfBirth}{delimiter}{registrant.Adress.street}{delimiter}" +
-				$"{registrant.Adress.city}{delimiter}{registrant.Adress.province}{delimiter}{registrant.Adress.postalCode}{delimiter}{registrant.PhoneNumber}" +
+			return $"{registrant.Id}{delimiter}{registrant.Name}{delimiter}{registrant.DateOfBirth}{delimiter}{registrant.Address.street}{delimiter}" +
+				$"{registrant.Address.city}{delimiter}{registrant.Address.province}{delimiter}{registrant.Address.postalCode}{delimiter}{registrant.PhoneNumber}" +
 				$"{delimiter}{registrant.Club.ClubNumber}";
 		}
 
@@ -49,7 +49,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			return null;
 		}
 
-		public void LoadSwimmer(string fileName, string delimiter)
+		public void LoadSwimmers(string fileName, string delimiter)
 		{
 			FileStream fileStream = default;
 			StreamReader reader = default;

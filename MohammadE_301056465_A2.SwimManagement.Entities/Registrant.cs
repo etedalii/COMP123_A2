@@ -6,7 +6,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 	{
 		private Club club;
 
-		public Address Adress { get; set; }
+		public Address Address { get; set; }
 		public Club Club 
 		{
 			set
@@ -38,7 +38,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 		{
 			Name = name;
 			DateOfBirth = dateOfBirth;
-			this.Adress = anAddress;
+			this.Address = anAddress;
 			PhoneNumber = phoneNumber;
 		}
 
@@ -48,7 +48,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 			Name = name;
 			DateOfBirth = dateOfBirth;
-			this.Adress = anAddress;
+			this.Address = anAddress;
 			PhoneNumber = phoneNumber;
 		}
 

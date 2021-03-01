@@ -40,7 +40,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			Swimmers.Add(aSwimmer);
 		}
 
-		public void EnterSwimmerTime(Registrant aSwimmer, string time)
+		public void EnterSwimmersTime(Registrant aSwimmer, string time)
 		{
 			
 		}

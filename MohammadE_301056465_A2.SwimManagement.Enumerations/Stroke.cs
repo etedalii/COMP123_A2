@@ -4,7 +4,7 @@
 	{
 		Butterfly,
 		Backstroke,
-		Breasstroke,
+		Breaststroke,
 		Freestyle,
 		IndividualMedley
 	}

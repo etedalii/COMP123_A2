@@ -53,7 +53,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			string result = string.Empty;
 			foreach (Registrant item in Swimmers)
 			{
-				result += $"{item.Id},{item.Club.Name},{item.Adress.street},{item.Adress.city},{item.Adress.province},{item.Adress.postalCode},{item.PhoneNumber}\n";
+				result += $"{item.Id},{item.Club.Name},{item.Address.street},{item.Address.city},{item.Address.province},{item.Address.postalCode},{item.PhoneNumber}\n";
 			}
 			return result;
 		}
