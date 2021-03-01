@@ -53,5 +53,11 @@
     <Compile Include="SwimMeet.cs" />
     <Compile Include="SwimmersManager.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MohammadE_301056465_A2.SwimManagement.Enumerations\MohammadE_301056465_A2.SwimManagement.Enumerations.csproj">
+      <Project>{ae472c03-7660-46b9-a895-bbf279249831}</Project>
+      <Name>MohammadE_301056465_A2.SwimManagement.Enumerations</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
