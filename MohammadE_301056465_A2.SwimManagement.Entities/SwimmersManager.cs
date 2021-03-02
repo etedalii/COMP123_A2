@@ -21,19 +21,13 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		private string formatRecord(Registrant aSwimmer, string delimiter)
 		{
-			Registrant registrant = default;
-			foreach (Registrant item in Swimmers)
-			{
-				if (aSwimmer.Id == item.Id)
-				{
-					registrant = item;
-					break;
-				}
-			}
+			string street = !string.IsNullOrEmpty(aSwimmer.Address.street) ? aSwimmer.Address.street : string.Empty;
+			string city = !string.IsNullOrEmpty(aSwimmer.Address.city) ? aSwimmer.Address.city : string.Empty;
+			string province = !string.IsNullOrEmpty(aSwimmer.Address.province) ? aSwimmer.Address.province : string.Empty;
+			string postalCode = !string.IsNullOrEmpty(aSwimmer.Address.postalCode) ? aSwimmer.Address.postalCode : string.Empty;
 
-			return $"{registrant.Id}{delimiter}{registrant.Name}{delimiter}{registrant.DateOfBirth}{delimiter}{registrant.Address.street}{delimiter}" +
-				$"{registrant.Address.city}{delimiter}{registrant.Address.province}{delimiter}{registrant.Address.postalCode}{delimiter}{registrant.PhoneNumber}" +
-				$"{delimiter}{registrant.Club.ClubNumber}";
+			return $"{aSwimmer.Id}{delimiter}{aSwimmer.Name}{delimiter}{aSwimmer.DateOfBirth}{delimiter}{street}{delimiter}{city}{delimiter}{province}{delimiter}{postalCode}{delimiter}" +
+				$"{aSwimmer.PhoneNumber}{delimiter}{aSwimmer.Club.ClubNumber}";
 		}
 
 		public Registrant GetSwimmer(uint regNumber)
@@ -121,7 +115,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				Address address = new Address(fields[3], fields[4], fields[5], fields[6]);
 				registrant = new Registrant(Convert.ToUInt32(fields[0]), fields[1], Convert.ToDateTime(fields[2]), address, Convert.ToUInt64(fields[7]));
 				registrant.Club = ClubManager.GetClub(Convert.ToUInt32(fields[8]));
-				
+
 				if (GetSwimmer(registrant.Id) != null)
 					throw new Exception($"Invalid swimmer record. Swimmer with the registration number already exists:\n{registrant}");
 				else
@@ -149,14 +143,12 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 				foreach (Registrant item in Swimmers)
 				{
-					string result = $"{item.Id}{delimiter}{item.Name}{delimiter}{item.PhoneNumber}{delimiter}";
+					string result = formatRecord(item, delimiter);
 					writer.WriteLine(result);
 				}
 			}
-			catch (IOException)
-			{
-
-			}
+			catch (IOException) { }
+			catch (Exception) { }
 			finally
 			{
 				if (fileStream != null)

@@ -21,8 +21,12 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		private string fromatRecord(Club aClub, string delimiter)
 		{
-			return $"{aClub.ClubNumber}{delimiter}{aClub.Name}{delimiter}{aClub.ClubAddress.street}{delimiter}{aClub.ClubAddress.city}{delimiter}" +
-				$"{aClub.ClubAddress.province}{delimiter}{aClub.ClubAddress.postalCode}{delimiter}{aClub.PhoneNumber}{delimiter}";
+			string street = !string.IsNullOrEmpty(aClub.ClubAddress.street) ? aClub.ClubAddress.street : string.Empty;
+			string city = !string.IsNullOrEmpty(aClub.ClubAddress.city) ? aClub.ClubAddress.city : string.Empty;
+			string province = !string.IsNullOrEmpty(aClub.ClubAddress.province) ? aClub.ClubAddress.province : string.Empty;
+			string postalCode = !string.IsNullOrEmpty(aClub.ClubAddress.postalCode) ? aClub.ClubAddress.postalCode : string.Empty;
+
+			return $"{aClub.ClubNumber}{delimiter}{aClub.Name}{delimiter}{street}{delimiter}{city}{delimiter}{province}{delimiter}{postalCode}{delimiter}{aClub.PhoneNumber}";
 		}
 
 		public Club GetClub(uint regNumber)
@@ -122,14 +126,12 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 				foreach (Club club in Clubs)
 				{
-					string result = $"{club.ClubNumber}{delimiter}{club.Name}{delimiter}{club.PhoneNumber}{delimiter}";
+					string result = fromatRecord(club, delimiter);
 					writer.WriteLine(result);
 				}
 			}
-			catch (IOException)
-			{
-
-			}
+			catch (IOException) { }
+			catch (Exception) { }
 			finally
 			{
 				if (fileStream != null)

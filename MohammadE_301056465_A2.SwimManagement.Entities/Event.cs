@@ -65,7 +65,9 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			public void AddOrUpdate(Registrant swimmer, Swim swim)
 			{
 				if (Contains(swimmer))
+				{
 					swimmers.Add(swimmer);
+				}
 				else
 				{
 					int index = 0;

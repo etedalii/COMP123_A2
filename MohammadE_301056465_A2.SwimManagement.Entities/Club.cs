@@ -7,7 +7,9 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 	{
 		public Address ClubAddress { get; set; }
 
-		//Represents the unique id of the club
+		/// <summary>
+		/// Represents the unique id of the club
+		/// </summary>
 		public uint ClubNumber { get; private set; }
 		public string Name { get; set; }
 		public ulong PhoneNumber { get; set; }
