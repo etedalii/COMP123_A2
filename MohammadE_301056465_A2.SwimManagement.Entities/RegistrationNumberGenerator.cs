@@ -8,7 +8,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		public static uint GetNext()
 		{
-			nextRegistrationNumber = (uint)new Random().Next();
+			nextRegistrationNumber = (uint)new Random(100).Next();
 
 			return nextRegistrationNumber;
 		}

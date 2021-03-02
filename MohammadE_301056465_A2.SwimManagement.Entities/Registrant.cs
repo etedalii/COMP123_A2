@@ -33,11 +33,11 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			Id = RegistrationNumberGenerator.GetNext();
 		}
 
-		public Registrant(string name, DateTime dateOfBirth, Address anAddress, ulong phoneNumber)
+		public Registrant(string name, DateTime dateOfBirth, Address anAddress, ulong phoneNumber) : this() 
 		{
 			Name = name;
 			DateOfBirth = dateOfBirth;
-			this.Address = anAddress;
+			Address = anAddress;
 			PhoneNumber = phoneNumber;
 		}
 
@@ -47,14 +47,17 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 			Name = name;
 			DateOfBirth = dateOfBirth;
-			this.Address = anAddress;
+			Address = anAddress;
 			PhoneNumber = phoneNumber;
 		}
 
 		public override string ToString()
-		{
-			string msg = $"The registrant/swimmer:{Name}";
-			return Club != null ? $"{msg} Club name is: {Club}": $"{msg} is not assigned";
+		{ 
+			string msg = $"Name: {Name}\nAddress:\n\t{Address.street}\n\t{Address.city}\n\t{Address.province}\n\t{Address.postalCode}\nPhone:{PhoneNumber}\nDOB:{DateOfBirth}\nId:{Id}\n";
+			if (Club != null)
+				msg += $"Club: {Club.Name}";
+
+			return msg;
 		}
 	}
 }
