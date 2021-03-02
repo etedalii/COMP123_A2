@@ -4,11 +4,11 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 {
 	public static class RegistrationNumberGenerator
 	{
-		static uint nextRegistrationNumber;
+		private static uint nextRegistrationNumber;
 
 		public static uint GetNext()
 		{
-			nextRegistrationNumber = (uint)new Random(100).Next();
+			nextRegistrationNumber = nextRegistrationNumber + 1;
 
 			return nextRegistrationNumber;
 		}

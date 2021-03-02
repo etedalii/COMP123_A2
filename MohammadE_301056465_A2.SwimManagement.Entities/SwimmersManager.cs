@@ -96,7 +96,27 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			try
 			{
 				string[] fields = aRecord.Split(new[] { delimiter }, StringSplitOptions.None);
-				checkException(fields);
+				uint result;
+				ulong phone;
+				DateTime dt;
+				string swimmer = $"{fields[0]},{fields[1]},{fields[2]}{fields[3]},{fields[4]},{fields[5]},{fields[6]},{fields[7]},{fields[8]}";
+				if (fields.Length < 8)
+					throw new Exception($"Invalid swimmer record. Not enough fields:\n{swimmer}");
+
+				if (!UInt32.TryParse(fields[0], out result))
+					throw new Exception($"Invalid swimmer record. Invalid registration number:\n{swimmer}");
+
+				if (!DateTime.TryParse(fields[2], out dt))
+					throw new Exception($"Invalid swimmer record. Birth date is invalid:\n{swimmer}");
+
+				if (string.IsNullOrEmpty(fields[1]))
+					throw new Exception($"Invalid swimmer record. Invalid swimmer name:\n{swimmer}");
+
+				if (!UInt64.TryParse(fields[7], out phone))
+					throw new Exception($"Invalid swimmer record. Phone number wrong format:\n{swimmer}");
+
+				if (!UInt64.TryParse(fields[8], out phone))
+					throw new Exception($"Invalid swimmer record. Club affiliation exists but not valid:\n{swimmer}");
 
 				Address address = new Address(fields[3], fields[4], fields[5], fields[6]);
 				registrant = new Registrant(Convert.ToUInt32(fields[0]), fields[1], Convert.ToDateTime(fields[2]), address, Convert.ToUInt64(fields[7]));
@@ -111,7 +131,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			{
 				throw ex;
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 			}
 			return registrant;
@@ -145,37 +165,6 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				if (writer != null)
 					writer.Close();
 			}
-		}
-
-		private void checkException(string[] fields)
-		{
-			uint result;
-			ulong phone;
-			DateTime dt;
-			string swimmer = $"{fields[0]},{fields[1]},{fields[2]}{fields[3]},{fields[4]},{fields[5]},{fields[6]},{fields[7]},{fields[8]}";
-
-			if (fields.Length < 8)
-				raiseException($"Invalid swimmer record. Not enough fields:\n{swimmer}");
-
-			if (!UInt32.TryParse(fields[0], out result))
-				raiseException($"Invalid swimmer record. Invalid registration number:\n{swimmer}");
-
-			if (!DateTime.TryParse(fields[2], out dt))
-				raiseException($"Invalid swimmer record. Birth date is invalid:\n{swimmer}");
-
-			if (string.IsNullOrEmpty(fields[1]))
-				raiseException($"Invalid swimmer record. Invalid swimmer name:\n{swimmer}");
-
-			if (!UInt64.TryParse(fields[7], out phone))
-				raiseException($"Invalid swimmer record. Phone number wrong format:\n{swimmer}");
-
-			if (!UInt64.TryParse(fields[8], out phone))
-				raiseException($"Invalid swimmer record. Club affiliation exists but not valid:\n{swimmer}");
-		}
-
-		private void raiseException(string message)
-		{
-			throw new Exception(message);
 		}
 	}
 }

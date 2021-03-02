@@ -1,9 +1,6 @@
 ﻿using MohammadE_301056465_A2.SwimManagement.Enumerations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MohammadE_301056465_A2.SwimManagement.Entities
 {
@@ -11,7 +8,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 	{
 		public PoolType Course { get; set; }
 		public DateTime EndDate { get; set; }
-		public List<Event> Events { get; set; }
+		public List<Event> Events { get; }
 		public string Name { get; set; }
 		public byte NoOfLanes { get; set; }
 		public DateTime StartDate { get; set; }
@@ -23,6 +20,9 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			EndDate = DateTime.Now;
 			Course = PoolType.SCM;
 			NoOfLanes = 8;
+
+			if (Events == null)
+				Events = new List<Event>();
 		}
 
 		public SwimMeet(string name, DateTime start, DateTime end, PoolType course, byte noOfLanes)
@@ -32,6 +32,9 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			EndDate = end;
 			Course = course;
 			NoOfLanes = noOfLanes;
+
+			if (Events == null)
+				Events = new List<Event>();
 		}
 
 		public void AddEvent(Event anEvent)
@@ -41,12 +44,24 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		public void Seed()
 		{
-			
+			foreach (Event item in Events)
+			{
+				item.Seed(NoOfLanes);
+			}
 		}
 
 		public override string ToString()
 		{
-			return $"{Name},{StartDate},{EndDate},{Course}{NoOfLanes}";
+			string msg = $"Swim meet name: {Name}\nFrom-to: {StartDate} to {EndDate}\nPool type: {Course}\nNo lanes: {NoOfLanes}\nEvents:\n";
+			foreach (Event item in Events)
+			{
+				msg += $"\t{item.Distance} {item.Stroke}\n\tSwimmers:\n\n";
+				foreach (Registrant swimmer in item.Swimmers)
+				{
+					msg += $"\t{swimmer.Name}\n";
+				}
+			}
+			return msg;
 		}
 	}
 }

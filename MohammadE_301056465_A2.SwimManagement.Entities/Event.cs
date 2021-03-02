@@ -1,9 +1,6 @@
 ﻿using MohammadE_301056465_A2.SwimManagement.Enumerations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MohammadE_301056465_A2.SwimManagement.Entities
 {
@@ -20,9 +17,11 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 		public Event()
 		{
 			swimmingEvents = new RegistrantsSwims();
+			if (Swimmers == null)
+				Swimmers = new List<Registrant>();
 		}
 
-		public Event(EventDistance distance, Stroke stroke)
+		public Event(EventDistance distance, Stroke stroke) : this()
 		{
 			Distance = distance;
 			Stroke = stroke;
@@ -38,11 +37,12 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				}
 			}
 			Swimmers.Add(aSwimmer);
+			//swimmingEvents. AddOrUpdate()
 		}
 
 		public void EnterSwimmersTime(Registrant aSwimmer, string time)
 		{
-			
+
 		}
 
 		public void Seed(byte maxLanes)
@@ -55,25 +55,41 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			return base.ToString();
 		}
 
-		class RegistrantsSwims
+		private class RegistrantsSwims
 		{
-			List<Registrant> sweimmers;
+			List<Registrant> swimmers;
 			List<Swim> swims;
 
 			public Swim Swim { get; set; }
 
 			public void AddOrUpdate(Registrant swimmer, Swim swim)
 			{
-				sweimmers.Add(swimmer);
+				if (Contains(swimmer))
+					swimmers.Add(swimmer);
+				else
+				{
+					int index = 0;
+					foreach (Registrant item in swimmers)
+					{
+						if (item.Id == swimmer.Id)
+						{
+							break;
+						}
+						else
+							index++;
+					}
+
+					swimmers[index] = swimmer;
+				}
 				swims.Add(swim);
 			}
 
 			public bool Contains(Registrant swimmer)
 			{
 				bool isExist = false;
-				foreach (Registrant item in sweimmers)
+				foreach (Registrant item in swimmers)
 				{
-					if(item.Id == swimmer.Id)
+					if (item.Id == swimmer.Id)
 					{
 						isExist = true;
 						break;
@@ -85,7 +101,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			public Swim GetSwimmersSwim(Registrant swimmer)
 			{
 				bool found = false;
-				foreach (Registrant item in sweimmers)
+				foreach (Registrant item in swimmers)
 				{
 					if (item.Id == swimmer.Id)
 					{
