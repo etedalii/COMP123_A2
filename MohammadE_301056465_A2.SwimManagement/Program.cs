@@ -27,7 +27,7 @@ namespace MohammadE_301056465_A2.SwimManagement
 
             try
             {
-                clbMngr.LoadClubs(@"D:\Clubs.txt", ",");
+                clbMngr.LoadClubs(@"C:\A2\Clubs.txt", ",");
             }
             catch (Exception ex)
             {
@@ -40,7 +40,8 @@ namespace MohammadE_301056465_A2.SwimManagement
                 DisplayInfo(i.ToString(), clbMngr.Clubs[i].ToString());
             }
 
-            swmMngr.LoadSwimmers(@"D:\Swimmers.txt", ",");
+
+            swmMngr.LoadSwimmers(@"C:\A2\Swimmers.txt", ",");
 
             for (int i = 0; i < swmMngr.Swimmers.Count; i++)
             {

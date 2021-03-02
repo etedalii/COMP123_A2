@@ -66,7 +66,8 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				while (record != null)
 				{
 					Registrant registrant = processSwimmerRecord(record, delimiter);
-					Swimmers.Add(registrant);
+					if (registrant != null)
+						Swimmers.Add(registrant);
 
 					record = reader.ReadLine();
 				}
@@ -87,15 +88,25 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		private Registrant processSwimmerRecord(string aRecord, string delimiter)
 		{
-			string[] fields = aRecord.Split(new[] { delimiter }, StringSplitOptions.None);
-			checkException(fields);
+			Registrant registrant = default;
+			try
+			{
+				string[] fields = aRecord.Split(new[] { delimiter }, StringSplitOptions.None);
+				checkException(fields);
 
-			Address address = new Address(fields[3], fields[4], fields[5], fields[6]);
-			Registrant registrant = new Registrant(Convert.ToUInt32(fields[0]), fields[1], Convert.ToDateTime(fields[2]), address, Convert.ToUInt64(fields[7]));
+				Address address = new Address(fields[3], fields[4], fields[5], fields[6]);
+				registrant = new Registrant(Convert.ToUInt32(fields[0]), fields[1], Convert.ToDateTime(fields[2]), address, Convert.ToUInt64(fields[7]));
 
-			if (GetSwimmer(registrant.Id) != null)
-				throw new Exception($"The {registrant}, Swimmer with the registration number already exists");
+				if (GetSwimmer(registrant.Id) != null)
+					throw new Exception($"The {registrant}, Swimmer with the registration number already exists");
 				else
+					return registrant;
+			}
+			catch (Exception ex)
+			{
+				//throw ex;
+			}
+
 			return registrant;
 		}
 

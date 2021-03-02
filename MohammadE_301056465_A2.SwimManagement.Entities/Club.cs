@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MohammadE_301056465_A2.SwimManagement.Entities
 {
@@ -19,6 +16,8 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 		public Club()
 		{
 			ClubNumber = RegistrationNumberGenerator.GetNext();
+			if (Swimmers == null)
+				Swimmers = new List<Registrant>();
 		}
 
 		public Club(string name, Address anddress, ulong phoneNumber)
@@ -55,11 +54,13 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		public override string ToString()
 		{
-			string result = $"{ClubNumber},{Name},{PhoneNumber}\n Club members are:\n";
-			foreach (Registrant item in Swimmers)
-			{
-				result += $"{item.Id},{item.Club.Name},{item.Address.street},{item.Address.city},{item.Address.province},{item.Address.postalCode},{item.PhoneNumber}\n";
-			}
+			//string result = "";// $"{ClubNumber},{Name},{ClubAddress.street},{ClubAddress.city},{ClubAddress.province},{ClubAddress.postalCode},{PhoneNumber}\n Club members are:\n";
+			string result = $"Name: {Name}\n Address:\n";
+			result += $"\t{ClubAddress.street}\n\t{ClubAddress.city}\n\t{ClubAddress.province}\n\t{ClubAddress.postalCode}\nPhone:{PhoneNumber}\nReg number:{ClubNumber}\nSwimmers:\n";
+
+			//foreach (Registrant item in Swimmers)
+			//{
+			//}
 			return result;
 		}
 	}

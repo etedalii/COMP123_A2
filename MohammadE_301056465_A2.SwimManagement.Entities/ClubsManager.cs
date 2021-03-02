@@ -83,9 +83,13 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				Club club = new Club(Convert.ToUInt32(fields[0]), fields[1], address, Convert.ToUInt64(fields[6]));
 
 				if (GetClub(club.ClubNumber) != null)
-					throw new Exception($"The {club}, Club with the registration number already exists");
+					throw new Exception($"Invalid club record. Club with the registration number already exists:\n{club}");
 				else
 					return club;
+			}
+			catch (IOException ex)
+			{
+				throw ex;
 			}
 			catch (Exception ex)
 			{
@@ -127,18 +131,19 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 		{
 			uint result;
 			ulong phone;
+			string club = $"{fields[0]},{fields[1]},{fields[2]}, {fields[3]}, {fields[4]}, {fields[5]},{fields[6]}";
 
 			if (fields.Length < 7)
-				raiseException($"The {fields}, Not enough fields");
+				raiseException($"Invalid club record. Not enough fields:\n{club}");
 
 			if (!UInt32.TryParse(fields[0], out result))
-				raiseException($"The {fields[0]}, Club number is not valid");
+				raiseException($"Invalid club record. Club number is not valid:\n{club}");
 
 			if (string.IsNullOrEmpty(fields[1]))
-				raiseException($"The {fields[1]}, Invalid club name");
+				raiseException($"Invalid club record. Invalid club name:\n{club}");
 
 			if (!UInt64.TryParse(fields[6], out phone))
-				raiseException($"The {fields[6]}, Phone number wrong format");
+				raiseException($"Invalid club record. Phone number wrong format:\n{club}");
 		}
 
 		private void raiseException(string message)
