@@ -28,7 +28,6 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 		public string Name { get; set; }
 		public ulong PhoneNumber { get; set; }
 
-
 		public Registrant()
 		{
 			Id = RegistrationNumberGenerator.GetNext();

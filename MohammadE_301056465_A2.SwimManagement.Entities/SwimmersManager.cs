@@ -38,6 +38,9 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		public Registrant GetSwimmer(uint regNumber)
 		{
+			if (Swimmers == null)
+				Swimmers = new List<Registrant>();
+
 			foreach (Registrant item in Swimmers)
 			{
 				if (item.Id == regNumber)
@@ -64,6 +67,8 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				{
 					Registrant registrant = processSwimmerRecord(record, delimiter);
 					Swimmers.Add(registrant);
+
+					record = reader.ReadLine();
 				}
 			}
 			catch (IOException ex)
@@ -82,12 +87,15 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		private Registrant processSwimmerRecord(string aRecord, string delimiter)
 		{
-			//Add Exception fields
 			string[] fields = aRecord.Split(new[] { delimiter }, StringSplitOptions.None);
-			Registrant registrant = new Registrant()
-			{
+			checkException(fields);
 
-			};
+			Address address = new Address(fields[3], fields[4], fields[5], fields[6]);
+			Registrant registrant = new Registrant(Convert.ToUInt32(fields[0]), fields[1], Convert.ToDateTime(fields[2]), address, Convert.ToUInt64(fields[7]));
+
+			if (GetSwimmer(registrant.Id) != null)
+				throw new Exception($"The {registrant}, Swimmer with the registration number already exists");
+				else
 			return registrant;
 		}
 
@@ -119,6 +127,33 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				if (writer != null)
 					writer.Close();
 			}
+		}
+
+		private void checkException(string[] fields)
+		{
+			uint result;
+			ulong phone;
+			DateTime dt;
+
+			if (fields.Length < 8)
+				raiseException($"The {fields}, Not enough fields");
+
+			if (!UInt32.TryParse(fields[0], out result))
+				raiseException($"The {fields[0]},  Invalid registration number");
+
+			if (!DateTime.TryParse(fields[2], out dt))
+				raiseException($"The {fields[2]},  Birth date is invalid");
+
+			if (string.IsNullOrEmpty(fields[1]))
+				raiseException($"The {fields[1]}, Invalid swimmer name");
+
+			if (!UInt64.TryParse(fields[7], out phone))
+				raiseException($"The {fields[7]}, Phone number wrong format");
+		}
+
+		private void raiseException(string message)
+		{
+			throw new Exception(message);
 		}
 	}
 }
