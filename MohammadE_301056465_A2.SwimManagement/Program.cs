@@ -35,18 +35,18 @@ namespace MohammadE_301056465_A2.SwimManagement
 				Console.WriteLine(ex.Message);
 			}
 
-			//for (int i = 0; i < clbMngr.Clubs.Count; i++)
-			//{
-			//	DisplayInfo(i.ToString(), clbMngr.Clubs[i].ToString());
-			//}
+			for (int i = 0; i < clbMngr.Clubs.Count; i++)
+			{
+				DisplayInfo(i.ToString(), clbMngr.Clubs[i].ToString());
+			}
 
 			swmMngr.LoadSwimmers(@"C:\A2\Swimmers.txt", ",");
 
 
-			//for (int i = 0; i < swmMngr.Swimmers.Count; i++)
-			//{
-			//	DisplayInfo(i.ToString(), swmMngr.Swimmers[i].ToString());
-			//}
+			for (int i = 0; i < swmMngr.Swimmers.Count; i++)
+			{
+				DisplayInfo(i.ToString(), swmMngr.Swimmers[i].ToString());
+			}
 			// Create 3 swimmers
 			Registrant swimmer1;
 			Registrant swimmer2;

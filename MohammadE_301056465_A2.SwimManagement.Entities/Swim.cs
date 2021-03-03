@@ -32,7 +32,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 		public override string ToString()
 		{
 			string time = Time != default ? Time.ToShortTimeString() : "no time";
-			return $"Heat number:{Heat}, Lane number:{Lane}, Swim Time:,{time}";
+			return $"H: {Heat}, L: {Lane}, Swim Time: {time}";
 		}
 	}
 }

@@ -134,11 +134,11 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			catch (Exception) { }
 			finally
 			{
-				if (fileStream != null)
-					fileStream.Close();
-
 				if (writer != null)
 					writer.Close();
+
+				if (fileStream != null)
+					fileStream.Close();
 			}
 		}
 	}

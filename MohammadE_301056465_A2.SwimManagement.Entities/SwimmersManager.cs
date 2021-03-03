@@ -26,8 +26,13 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			string province = !string.IsNullOrEmpty(aSwimmer.Address.province) ? aSwimmer.Address.province : string.Empty;
 			string postalCode = !string.IsNullOrEmpty(aSwimmer.Address.postalCode) ? aSwimmer.Address.postalCode : string.Empty;
 
-			return $"{aSwimmer.Id}{delimiter}{aSwimmer.Name}{delimiter}{aSwimmer.DateOfBirth}{delimiter}{street}{delimiter}{city}{delimiter}{province}{delimiter}{postalCode}{delimiter}" +
-				$"{aSwimmer.PhoneNumber}{delimiter}{aSwimmer.Club.ClubNumber}";
+			string msg = $"{aSwimmer.Id}{delimiter}{aSwimmer.Name}{delimiter}{aSwimmer.DateOfBirth}{delimiter}{street}{delimiter}{city}{delimiter}{province}{delimiter}{postalCode}{delimiter}" +
+				$"{aSwimmer.PhoneNumber}";
+
+			if (aSwimmer.Club != null)
+				msg += $"{ delimiter}{ aSwimmer.Club.ClubNumber}";
+			
+			return msg;
 		}
 
 		public Registrant GetSwimmer(uint regNumber)
@@ -151,11 +156,11 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			catch (Exception) { }
 			finally
 			{
-				if (fileStream != null)
-					fileStream.Close();
-
 				if (writer != null)
 					writer.Close();
+
+				if (fileStream != null)
+					fileStream.Close();
 			}
 		}
 	}

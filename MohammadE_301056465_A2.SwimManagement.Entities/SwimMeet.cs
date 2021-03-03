@@ -55,10 +55,10 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			string msg = $"Swim meet name: {Name}\nFrom-to: {StartDate} to {EndDate}\nPool type: {Course}\nNo lanes: {NoOfLanes}\nEvents:\n";
 			foreach (Event item in Events)
 			{
-				msg += $"\t{item.Distance} {item.Stroke}\n\tSwimmers:\n\n";
+				msg += $"\t{item.Distance} {item.Stroke}\n\tSwimmers:\n";
 				foreach (Registrant swimmer in item.Swimmers)
 				{
-					msg += $"\t{swimmer.Name}\n";
+					msg += $"\t{swimmer.Name}\n\t\t{item.Swimmers}";
 				}
 			}
 			return msg;

@@ -1,6 +1,7 @@
 ﻿using MohammadE_301056465_A2.SwimManagement.Enumerations;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace MohammadE_301056465_A2.SwimManagement.Entities
 {
@@ -12,13 +13,17 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		public Stroke Stroke { get; set; }
 
-		public List<Registrant> Swimmers { get; }
+		public List<Registrant> Swimmers
+		{
+			get
+			{
+				return swimmingEvents.swimmers;
+			}
+		}
 
 		public Event()
 		{
 			swimmingEvents = new RegistrantsSwims();
-			if (Swimmers == null)
-				Swimmers = new List<Registrant>();
 		}
 
 		public Event(EventDistance distance, Stroke stroke) : this()
@@ -29,42 +34,81 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		public void AddSwimmer(Registrant aSwimmer)
 		{
-			foreach (Registrant item in Swimmers)
+			foreach (Registrant item in swimmingEvents.swimmers)
 			{
 				if (item.Id == aSwimmer.Id)
 				{
 					throw new Exception($"Swimmer {item.Name},{item.Id} is already enter");
 				}
 			}
-			Swimmers.Add(aSwimmer);
-			//swimmingEvents. AddOrUpdate()
+			Swim swim = new Swim();
+			swimmingEvents.AddOrUpdate(aSwimmer, swim);
 		}
 
 		public void EnterSwimmersTime(Registrant aSwimmer, string time)
 		{
+			for (int i = 0; i < swimmingEvents.swimmers.Count; i++)
+			{
+				if (swimmingEvents.swimmers[i].Id == aSwimmer.Id)
+				{
+					Swim swim = swimmingEvents.swims[i];
 
+					string[] result = time.Split(':');
+					string secound = result[1].Split('.')[0];
+					string milisec = result[1].Split('.')[1];
+					DateTime dateValue = new DateTime(1, 1, 1, 0, Convert.ToInt32(result[0]), Convert.ToInt32(secound), Convert.ToInt32(milisec));
+					swim.Time = dateValue;
+
+					swimmingEvents.swims[i] = swim;
+				}
+			}
 		}
 
 		public void Seed(byte maxLanes)
 		{
+			byte heat = 1;
+			byte lane = 1;
+			for (int i = 0; i < swimmingEvents.swimmers.Count; i++)
+			{
+				if (i != 0 && i % maxLanes != 0)
+				{
+					Swim swim = swimmingEvents.swims[i];
+					swim.Lane = (byte)lane++;
+					swim.Heat = heat;
 
+					swimmingEvents.swims[i] = swim;
+				}
+				else
+				{
+					heat++;
+					lane = 1;
+				}
+			}
 		}
 
 		public override string ToString()
 		{
-			return base.ToString();
+			string result = $"{Distance},{Stroke}\n";
+			for (int i = 0; i < swimmingEvents.swimmers.Count; i++)
+			{
+				Swim swim = swimmingEvents.swims[i];
+				result += $"{swimmingEvents.swimmers[i].Name}\n";
+				if (swim == null)
+					result += $"Not seeded/no swim\n";
+			}
+			return result;
 		}
 
 		private class RegistrantsSwims
 		{
-			List<Registrant> swimmers;
-			List<Swim> swims;
+			public List<Registrant> swimmers = new List<Registrant>();
+			public List<Swim> swims = new List<Swim>();
 
 			public Swim Swim { get; set; }
 
 			public void AddOrUpdate(Registrant swimmer, Swim swim)
 			{
-				if (Contains(swimmer))
+				if (!Contains(swimmer))
 				{
 					swimmers.Add(swimmer);
 				}
