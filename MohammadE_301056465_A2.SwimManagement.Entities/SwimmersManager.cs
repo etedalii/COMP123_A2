@@ -21,10 +21,10 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		private string formatRecord(Registrant aSwimmer, string delimiter)
 		{
-			string street = !string.IsNullOrEmpty(aSwimmer.Address.street) ? aSwimmer.Address.street : string.Empty;
-			string city = !string.IsNullOrEmpty(aSwimmer.Address.city) ? aSwimmer.Address.city : string.Empty;
-			string province = !string.IsNullOrEmpty(aSwimmer.Address.province) ? aSwimmer.Address.province : string.Empty;
-			string postalCode = !string.IsNullOrEmpty(aSwimmer.Address.postalCode) ? aSwimmer.Address.postalCode : string.Empty;
+			string street = !string.IsNullOrEmpty(aSwimmer.Address.Street) ? aSwimmer.Address.Street : string.Empty;
+			string city = !string.IsNullOrEmpty(aSwimmer.Address.City) ? aSwimmer.Address.City : string.Empty;
+			string province = !string.IsNullOrEmpty(aSwimmer.Address.Province) ? aSwimmer.Address.Province : string.Empty;
+			string postalCode = !string.IsNullOrEmpty(aSwimmer.Address.PostalCode) ? aSwimmer.Address.PostalCode : string.Empty;
 
 			string msg = $"{aSwimmer.Id}{delimiter}{aSwimmer.Name}{delimiter}{aSwimmer.DateOfBirth}{delimiter}{street}{delimiter}{city}{delimiter}{province}{delimiter}{postalCode}{delimiter}" +
 				$"{aSwimmer.PhoneNumber}";
@@ -76,7 +76,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			{
 				throw ex;
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 			}
 			finally

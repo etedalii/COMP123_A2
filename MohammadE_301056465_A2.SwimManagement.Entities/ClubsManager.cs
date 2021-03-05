@@ -21,10 +21,10 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		private string fromatRecord(Club aClub, string delimiter)
 		{
-			string street = !string.IsNullOrEmpty(aClub.ClubAddress.street) ? aClub.ClubAddress.street : string.Empty;
-			string city = !string.IsNullOrEmpty(aClub.ClubAddress.city) ? aClub.ClubAddress.city : string.Empty;
-			string province = !string.IsNullOrEmpty(aClub.ClubAddress.province) ? aClub.ClubAddress.province : string.Empty;
-			string postalCode = !string.IsNullOrEmpty(aClub.ClubAddress.postalCode) ? aClub.ClubAddress.postalCode : string.Empty;
+			string street = !string.IsNullOrEmpty(aClub.ClubAddress.Street) ? aClub.ClubAddress.Street : string.Empty;
+			string city = !string.IsNullOrEmpty(aClub.ClubAddress.City) ? aClub.ClubAddress.City : string.Empty;
+			string province = !string.IsNullOrEmpty(aClub.ClubAddress.Province) ? aClub.ClubAddress.Province : string.Empty;
+			string postalCode = !string.IsNullOrEmpty(aClub.ClubAddress.PostalCode) ? aClub.ClubAddress.PostalCode : string.Empty;
 
 			return $"{aClub.ClubNumber}{delimiter}{aClub.Name}{delimiter}{street}{delimiter}{city}{delimiter}{province}{delimiter}{postalCode}{delimiter}{aClub.PhoneNumber}";
 		}

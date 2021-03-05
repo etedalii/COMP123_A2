@@ -57,7 +57,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 		public override string ToString()
 		{
 			string result = $"Name: {Name}\n Address:\n";
-			result += $"\t{ClubAddress.street}\n\t{ClubAddress.city}\n\t{ClubAddress.province}\n\t{ClubAddress.postalCode}\nPhone:{PhoneNumber}\nReg number:{ClubNumber}\nSwimmers:\n";
+			result += $"\t{ClubAddress.Street}\n\t{ClubAddress.City}\n\t{ClubAddress.Province}\n\t{ClubAddress.PostalCode}\nPhone:{PhoneNumber}\nReg number:{ClubNumber}\nSwimmers:\n";
 
 			foreach (Registrant swimmer in Swimmers)
 			{

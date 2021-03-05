@@ -56,7 +56,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 
 		public override string ToString()
 		{ 
-			string msg = $"Name: {Name}\nAddress:\n\t{Address.street}\n\t{Address.city}\n\t{Address.province}\n\t{Address.postalCode}\nPhone:{PhoneNumber}\nDOB:{DateOfBirth}\nId:{Id}\n";
+			string msg = $"Name: {Name}\nAddress:\n\t{Address.Street}\n\t{Address.City}\n\t{Address.Province}\n\t{Address.PostalCode}\nPhone:{PhoneNumber}\nDOB:{DateOfBirth}\nId:{Id}\n";
 			
 			msg += (Club != null? $"Club: {Club.Name}" : "Club: Not assigned");
 			
