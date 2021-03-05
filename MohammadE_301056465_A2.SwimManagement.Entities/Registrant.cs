@@ -12,7 +12,10 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			set
 			{
 				if (club == null)
+                {
 					club = value;
+                }
+					
 				else
 				{
 					throw new Exception("Swimmer is registered with a different club");
@@ -54,9 +57,9 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 		public override string ToString()
 		{ 
 			string msg = $"Name: {Name}\nAddress:\n\t{Address.street}\n\t{Address.city}\n\t{Address.province}\n\t{Address.postalCode}\nPhone:{PhoneNumber}\nDOB:{DateOfBirth}\nId:{Id}\n";
-			if (Club != null)
-				msg += $"Club: {Club.Name}";
-
+			
+			msg += (Club != null? $"Club: {Club.Name}" : "Club: Not assigned");
+			
 			return msg;
 		}
 	}

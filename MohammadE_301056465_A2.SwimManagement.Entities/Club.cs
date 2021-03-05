@@ -59,9 +59,9 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			string result = $"Name: {Name}\n Address:\n";
 			result += $"\t{ClubAddress.street}\n\t{ClubAddress.city}\n\t{ClubAddress.province}\n\t{ClubAddress.postalCode}\nPhone:{PhoneNumber}\nReg number:{ClubNumber}\nSwimmers:\n";
 
-			foreach (Registrant item in Swimmers)
+			foreach (Registrant swimmer in Swimmers)
 			{
-				result += "\t" + item.Name + "\n";
+				result += "\t" + swimmer.Name + "\n";
 			}
 			return result;
 		}

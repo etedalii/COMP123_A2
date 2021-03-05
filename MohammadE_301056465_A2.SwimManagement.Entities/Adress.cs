@@ -2,22 +2,22 @@
 {
 	public struct Address
 	{
-		public string city;
-		public string postalCode;
-		public string province;
-		public string street;
+		public string City;
+		public string PostalCode;
+		public string Province;
+		public string Street;
 
 		public Address(string street, string city, string province, string postalCode)
 		{
-			this.city = city;
-			this.street = street;
-			this.province = province;
-			this.postalCode = postalCode;
+			this.City = city;
+			this.Street = street;
+			this.Province = province;
+			this.PostalCode = postalCode;
 		}
 
 		public override string ToString()
 		{
-			return $"{street}\n{city}\n{province}\n{postalCode}";
+			return $"{Street}\n{City}\n{Province}\n{PostalCode}";
 		}
 	}
 }
