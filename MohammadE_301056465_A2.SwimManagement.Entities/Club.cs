@@ -22,13 +22,11 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				Swimmers = new List<Registrant>();
 		}
 
-		public Club(string name, Address anddress, ulong phoneNumber)
+		public Club(string name, Address anddress, ulong phoneNumber) : this()
 		{
 			Name = name;
 			ClubAddress = anddress;
 			PhoneNumber = phoneNumber;
-			if (Swimmers == null)
-				Swimmers = new List<Registrant>();
 		}
 
 		internal Club(uint regNumber, string name, Address anddress, ulong phoneNumber)

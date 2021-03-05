@@ -15,7 +15,6 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
                 {
 					club = value;
                 }
-					
 				else
 				{
 					throw new Exception("Swimmer is registered with a different club");

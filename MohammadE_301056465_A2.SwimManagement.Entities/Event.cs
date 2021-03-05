@@ -147,6 +147,7 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 			public Swim GetSwimmersSwim(Registrant swimmer)
 			{
 				bool found = false;
+				int index = 0;
 				foreach (Registrant item in swimmers)
 				{
 					if (item.Id == swimmer.Id)
@@ -154,11 +155,12 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 						found = true;
 						break;
 					}
+					index++;
 				}
+
 				if (found)
 				{
-					// TODO complete here
-					return Swim;
+					return swims[index];
 				}
 				else
 					throw new Exception("Swimmer has not entered event");

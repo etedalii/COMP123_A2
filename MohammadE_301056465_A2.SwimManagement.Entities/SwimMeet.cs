@@ -25,16 +25,13 @@ namespace MohammadE_301056465_A2.SwimManagement.Entities
 				Events = new List<Event>();
 		}
 
-		public SwimMeet(string name, DateTime start, DateTime end, PoolType course, byte noOfLanes)
+		public SwimMeet(string name, DateTime start, DateTime end, PoolType course, byte noOfLanes) : this()
 		{
 			Name = name;
 			StartDate = start;
 			EndDate = end;
 			Course = course;
 			NoOfLanes = noOfLanes;
-
-			if (Events == null)
-				Events = new List<Event>();
 		}
 
 		public void AddEvent(Event anEvent)
